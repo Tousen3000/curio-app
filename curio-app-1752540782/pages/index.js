@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import { Loader, Search } from 'lucide-react';
-import AnswerCard from '@/components/AnswerCard';
+import AnswerCard from '../components/AnswerCard';
 
 export default function Home() {
   const [query, setQuery] = useState('');
