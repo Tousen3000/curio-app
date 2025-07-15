@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/globals.css';
 import { motion } from 'framer-motion';
 
 export default function Home() {
