@@ -1,18 +1,32 @@
-import { Sparkles } from 'lucide-react';
+import React from 'react';
 
-export default function AnswerCard({ query, answer }) {
+export default function AnswerCard({ answer, sources = [], suggestions = [] }) {
   return (
-    <div className="bg-white dark:bg-zinc-900 shadow-xl rounded-2xl p-6 mx-auto mt-8 max-w-3xl border border-gray-200 dark:border-zinc-800">
-      <div className="flex items-center gap-2 mb-3 text-sm text-gray-500 dark:text-zinc-400">
-        <Sparkles className="h-4 w-4 text-blue-500" />
-        <span>Curio's answer to:</span>
-      </div>
-      <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-        {query}
-      </h2>
-      <p className="text-lg leading-relaxed text-gray-800 dark:text-zinc-100">
-        {answer}
-      </p>
+    <div className="bg-white/5 p-6 mt-6 rounded-2xl shadow-lg border border-white/10">
+      <h2 className="text-xl font-semibold mb-4 text-white">Answer</h2>
+      <p className="text-lg text-white/90 leading-relaxed whitespace-pre-line">{answer}</p>
+
+      {sources.length > 0 && (
+        <div className="mt-6">
+          <h3 className="text-white font-semibold mb-2">Sources:</h3>
+          <ul className="list-disc list-inside text-blue-400">
+            {sources.map((src, i) => (
+              <li key={i}><a href={src} target="_blank" rel="noopener noreferrer">{src}</a></li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {suggestions.length > 0 && (
+        <div className="mt-6">
+          <h3 className="text-white font-semibold mb-2">You may also like:</h3>
+          <ul className="list-disc list-inside text-white/80">
+            {suggestions.map((s, i) => (
+              <li key={i}>{s}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
