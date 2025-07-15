@@ -10,22 +10,16 @@ export default async function handler(req) {
   const { query } = await req.json();
   const apiKey = process.env.OPENAI_API_KEY;
 
-  const messages = [
-    { role: "system", content: "You are Curio, a smart search assistant. Always be helpful and include sources if available." },
-    { role: "user", content: query }
-  ];
-
   const body = {
     model: "gpt-4o",
-    messages,
-    tools: [
-      { type: "tool_use", tool_spec: { name: "web_search" } }
+    messages: [
+      { role: "system", content: "You are Curio, a smart search assistant. Always give helpful, concise answers and cite sources when possible." },
+      { role: "user", content: query }
     ],
-    tool_choice: "auto",
     temperature: 0.7
   };
 
-  const openaiRes = await fetch("https://api.openai.com/v1/chat/completions", {
+  const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -34,8 +28,12 @@ export default async function handler(req) {
     body: JSON.stringify(body)
   });
 
-  const result = await openaiRes.json();
-  const answer = result.choices?.[0]?.message?.content || "No answer found.";
+  const result = await res.json();
+
+  const answer =
+    result.choices?.[0]?.message?.content?.trim() ||
+    result.choices?.[0]?.message?.tool_calls?.[0]?.function?.arguments ||
+    "No answer found.";
 
   return new Response(JSON.stringify({ answer }), {
     headers: { "Content-Type": "application/json" }
