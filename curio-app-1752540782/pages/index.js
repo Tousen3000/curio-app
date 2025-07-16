@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AnswerCard from '@/components/AnswerCard';
+import AnswerCard from '../components/AnswerCard';
 
 export default function Home() {
   const [query, setQuery] = useState('');
