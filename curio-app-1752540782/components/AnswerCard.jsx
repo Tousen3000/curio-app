@@ -1,33 +1,26 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { Sparkles, Link2, Lightbulb } from 'lucide-react';
 
 export default function AnswerCard({ answer, sources = [], suggestions = [] }) {
   return (
-    <div className="w-full max-w-3xl mt-12 px-8 py-10 bg-gradient-to-br from-[#111111] to-[#1a1a1a] rounded-3xl shadow-[0_15px_50px_rgba(0,0,0,0.4)] backdrop-blur-md transition-all duration-300 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-6 text-indigo-400">
-        <Sparkles className="w-5 h-5" />
-        <h2 className="text-2xl font-semibold tracking-tight font-sans">Curio Answer</h2>
-      </div>
-
-      {/* Markdown-rendered Answer */}
-      <div className="prose prose-invert prose-p:mb-4 prose-strong:text-white/95 prose-li:marker:text-gray-500 max-w-none text-white/90 text-[17px] leading-7 font-light">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{answer}</ReactMarkdown>
+    <div className="w-full max-w-3xl mt-12 bg-[#121212] text-white px-8 py-10 rounded-2xl shadow-xl space-y-8">
+      
+      {/* Answer */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4 text-white">Answer</h2>
+        <div className="prose prose-invert max-w-none text-lg leading-7 text-white/90">
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{answer}</ReactMarkdown>
+        </div>
       </div>
 
       {/* Sources */}
       {sources.length > 0 && (
-        <div className="mt-8">
-          <div className="flex items-center gap-2 text-cyan-300 mb-2">
-            <Link2 className="w-4 h-4" />
-            <span className="text-sm font-medium tracking-wider uppercase">Sources</span>
-          </div>
-          <ul className="space-y-1 pl-5 text-sm text-blue-400 list-disc list-inside">
+        <div>
+          <h3 className="text-base font-semibold mb-2 text-cyan-300 uppercase tracking-wide">Sources</h3>
+          <ul className="list-disc list-inside text-sm space-y-1 text-blue-400">
             {sources.map((src, i) => (
               <li key={i}>
-                <a href={src} target="_blank" rel="noopener noreferrer" className="hover:text-blue-200 hover:underline transition-all">
+                <a href={src} target="_blank" rel="noopener noreferrer" className="hover:underline hover:text-blue-300 transition">
                   {src}
                 </a>
               </li>
@@ -38,17 +31,11 @@ export default function AnswerCard({ answer, sources = [], suggestions = [] }) {
 
       {/* Suggestions */}
       {suggestions.length > 0 && (
-        <div className="mt-8">
-          <div className="flex items-center gap-2 text-yellow-300 mb-2">
-            <Lightbulb className="w-4 h-4" />
-            <span className="text-sm font-medium tracking-wider uppercase">Suggested follow-ups</span>
-          </div>
-          <ul className="space-y-1 pl-5 text-sm text-white/80 list-disc list-inside">
+        <div>
+          <h3 className="text-base font-semibold mb-2 text-yellow-300 uppercase tracking-wide">You might also ask</h3>
+          <ul className="list-disc list-inside text-sm space-y-1 text-white/80">
             {suggestions.map((s, i) => (
-              <li
-                key={i}
-                className="hover:text-yellow-400 cursor-pointer transition-colors"
-              >
+              <li key={i} className="cursor-pointer hover:text-yellow-400 transition">
                 {s}
               </li>
             ))}
