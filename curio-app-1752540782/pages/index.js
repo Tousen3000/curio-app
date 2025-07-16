@@ -60,13 +60,6 @@ export default function Home() {
         </button>
       </div>
 
-      {answer && (
-        <div className="mt-10 w-full max-w-xl bg-gray-900 text-white p-6 rounded-xl border border-gray-700">
-          <h2 className="text-lg font-semibold mb-2">Answer:</h2>
-          <p className="text-base leading-relaxed text-gray-300">{answer}</p>
-        </div>
-      )}
-
       {!loading && answer && (
         <AnswerCard
           query={query}
