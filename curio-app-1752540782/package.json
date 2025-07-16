@@ -1,21 +1,26 @@
 {
   "name": "curio-app",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "lucide-react": "^0.373.0",
+    "lucide-react": "^0.263.0",
     "next": "13.5.6",
-    "framer-motion": "^10.16.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-markdown": "^9.0.0",
+    "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.3.2"
+    "autoprefixer": "^10.4.17",
+    "eslint": "8.56.0",
+    "eslint-config-next": "13.5.6",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.4.1"
   }
 }
