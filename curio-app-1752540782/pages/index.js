@@ -58,14 +58,6 @@ export default function Home() {
           <h2 className="text-lg font-semibold mb-2">Answer:</h2>
           <p className="text-base leading-relaxed text-gray-300">{answer}</p>
         </div>
-
-       {/* answer */}
-        {!loading && answer && (
-          <AnswerCard
-            query={query}
-            answer={answer}
-            sources={sources}
-            suggestions={suggest}
       )}
     </main>
   );
