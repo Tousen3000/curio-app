@@ -11,7 +11,11 @@ export default function AnswerCard({ answer, sources = [], suggestions = [] }) {
           <h3 className="text-white font-semibold mb-2">Sources:</h3>
           <ul className="list-disc list-inside text-blue-400">
             {sources.map((src, i) => (
-              <li key={i}><a href={src} target="_blank" rel="noopener noreferrer">{src}</a></li>
+              <li key={i}>
+                <a href={src} target="_blank" rel="noopener noreferrer">
+                  {src}
+                </a>
+              </li>
             ))}
           </ul>
         </div>
