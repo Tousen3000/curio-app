@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import AnswerCard from '@/components/AnswerCard';
 
 export default function Home() {
   const [query, setQuery] = useState('');
   const [answer, setAnswer] = useState(null);
+  const [sources, setSources] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
@@ -10,6 +13,8 @@ export default function Home() {
 
     setLoading(true);
     setAnswer(null);
+    setSources([]);
+    setSuggestions([]);
 
     try {
       const res = await fetch('/api/search', {
@@ -20,6 +25,8 @@ export default function Home() {
 
       const data = await res.json();
       setAnswer(data.answer || 'No answer found.');
+      setSources(data.sources || []);
+      setSuggestions(data.suggestions || []);
     } catch (err) {
       setAnswer('Something went wrong. Try again.');
     }
@@ -58,16 +65,16 @@ export default function Home() {
           <h2 className="text-lg font-semibold mb-2">Answer:</h2>
           <p className="text-base leading-relaxed text-gray-300">{answer}</p>
         </div>
+      )}
 
-          {/* answer */}
-        {!loading && answer && (
-          <AnswerCard
-            query={query}
-            answer={answer}
-            sources={sources}
-            suggestions={suggest}
-          />
-        )}
+      {!loading && answer && (
+        <AnswerCard
+          query={query}
+          answer={answer}
+          sources={sources}
+          suggestions={suggestions}
+        />
+      )}
     </main>
   );
 }
